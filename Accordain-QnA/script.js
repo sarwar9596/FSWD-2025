@@ -28,7 +28,6 @@ closeCrossOne.addEventListener('click', () => {
   answerOne.style.display = 'none';
   overlayLayer.style.visibility = 'hidden';
 });
-
 questionTwo.addEventListener('click', () => {
   answerTwo.style.display = 'flex';
   questionTwo.style.zIndex = '20';
