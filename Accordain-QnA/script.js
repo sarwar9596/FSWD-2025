@@ -20,11 +20,14 @@ let closeCrossFive = document.querySelector('#closeBtn5');
 let overlayLayer = document.querySelector('.overlay-layer');
 
 questionOne.addEventListener('click', () => {
+  console.log(' i also got clicked!');
   answerOne.style.display = 'flex';
   questionOne.style.zIndex = '20';
   overlayLayer.style.visibility = 'visible';
 });
-closeCrossOne.addEventListener('click', () => {
+closeCrossOne.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('i got clicked');
   answerOne.style.display = 'none';
   overlayLayer.style.visibility = 'hidden';
 });
