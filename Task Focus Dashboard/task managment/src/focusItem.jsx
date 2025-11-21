@@ -19,21 +19,33 @@ export default function FocusItem ({item, addItemsFinished}) {
         },[])
         
         function stopClock(){
-            setClockTime((prev=> prev + 0 ))
+            setClockTime((prev=> prev ))
         }
     
     return (
-        <>
-        
         <li key={item.id} 
-        className="bg-gray-200 text-black p-2 rounded-lg w-full mb-1 flex justify-between items-center">
-            <div className="">{item.text}</div>
-            <div className=" flex flex-row justify-between ">
-                <div className="flex justify-between items-center font-semibold text-nowrap border-2 rounded-full bg-amber-200 text-black p-1">{clockTime}</div>
-                <button className="bg-red-500  rounded-3xl  mx-1  hover:scale-105 font-semibold p-1.5  hover:shadow-xl hover:shadow-blue-100/30 
-                transition-all duration-300" onClick={()=>stopClock()}>STOP</button>
-                <button className="bg-green-500 mx-1  rounded-3xl p-1.5 text-white font-semibold" onClick={()=>addItemsFinished(item)}>Finished</button>
+        className="bg-gray-200 text-black p-2 mb-1 rounded-lg w-full max-w-4xl flex justify-between items-center gap-6">
+        
+        <div className="flex-1 min-w-0 break-words">
+            {item.text}
+        </div>
+        
+        <div className="flex flex-col font-bold text-[10px] w-20 text-center">
+            {item.currentDateTime}
+        </div>
+        
+        <div className="flex items-center gap-3 w-auto flex-shrink-0">
+            <div className="flex justify-between items-center font-semibold text-nowrap border-2 rounded-full bg-amber-200 text-black px-3 py-1">
+                {clockTime}
             </div>
-        </li>
-        </>)
-} 
+            <button className="bg-red-500 rounded-3xl hover:scale-105 font-semibold px-4 py-2 hover:shadow-xl hover:shadow-blue-100/30 
+                    transition-all duration-300" onClick={()=>stopClock()}>
+                STOP
+            </button>
+            <button className="bg-green-500 rounded-3xl hover:scale-105 px-4 py-2 text-white font-semibold" onClick={()=>addItemsFinished(item)}>
+                Finished
+            </button>
+        </div>
+    </li>
+    )
+}

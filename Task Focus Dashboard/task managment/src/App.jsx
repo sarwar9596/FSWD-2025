@@ -15,7 +15,8 @@ const [finishedList, setFinishedList ] = useState([])
 
   function addNewList(newTask)
   {
-    setTasks(prev=>[...prev,newTask])
+    newTask.currentDateTime = new Date().toLocaleString()
+    setTasks(prev=>[...prev,{...newTask,currentDateTime: new Date().toLocaleString()}])
   }
   function deleteTask(id){
     setTasks(tasks.filter((task)=> task.id !== id))
@@ -24,19 +25,20 @@ const [finishedList, setFinishedList ] = useState([])
   }
   function updateFocusList(task){
     if (focusList.includes(task)) return;
-    setFocusList((prev)=> [...prev, task])
+    setFocusList((prev)=> [...prev, {...task,currentDateTime: new Date().toLocaleString()}])
   }
   function updateFinishedList(item){
     if(finishedList.includes(item)) return;
-    setFinishedList((prev)=> [...prev, item])
+    setFinishedList((prev)=> [...prev,{...item,currentDateTime: new Date().toLocaleString()}])
     setFocusList(focusList.filter(focusItem=> focusItem.id !== item.id))
+    setTasks(tasks.filter(task=> task.id !== item.id))
   }
   
    return (
     <>
     <div className='flex flex-col justify-center items-center'>
     <div><InputBox addNewTask={addNewList} /></div>
-    <div className='flex items-start gap-6  relative top-12'>
+    <div className='flex items-start gap-6 w-full relative top-12'>
     <TaskList tasks={tasks} deleteTask={deleteTask} addItemFocus={updateFocusList} />
     <FocusList  focusList={focusList} addItemsFinished={updateFinishedList}/>
     <Finished finishedList={finishedList}/>
